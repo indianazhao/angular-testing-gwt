@@ -6,6 +6,7 @@
     "module": "commonjs",
     "types": [
       "jest",
+      "@hirez_io/jest-given",
       "node"
     ]
   },

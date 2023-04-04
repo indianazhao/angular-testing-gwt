@@ -1,35 +1,31 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+function addTwo(num: number) {
+  return num + 2;
+}
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+  let firstNum = 0;
+  let actualResult = 0;
+
+  // THIS IS EXACTLY LIKE A `beforeEach`
+  // It's where you setup your code / inputs
+  Given(() => {
+    firstNum = 1;
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  // THIS IS A SPECIAL TYPE OF `beforeEach`
+  // It's where you call the action under test
+  When(() => {
+    actualResult = addTwo(firstNum);
   });
 
-  it(`should have as title 'angular-testing-gwt'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-testing-gwt');
+  // THIS IS EXACTLY LIKE A `it()`
+  // It's where you expect the desired outcome
+  Then(() => {
+    expect(actualResult).toEqual(3);
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-testing-gwt app is running!');
+  // You can also add a message
+  Then('it should be equal to 3', () => {
+    expect(actualResult).toEqual(3);
   });
 });
