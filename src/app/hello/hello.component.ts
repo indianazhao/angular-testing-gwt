@@ -12,4 +12,7 @@ export class HelloComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getWelcomingMessage(userName: string) {
+    return `Hello ${userName}`;
+  }
 }

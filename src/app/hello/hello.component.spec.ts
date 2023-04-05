@@ -1,14 +1,13 @@
-describe('Method: getWelcomingMessage', () => {
+import { HelloComponent } from './hello.component';
 
-  function getWelcomingMessage(userName: string) {
-    return `Hello ${userName}`;
-  }
+describe('Method: getWelcomingMessage', () => {
 
   let actualResult: string, expectedResult: string;
   let fakeUserName: string;
+  let componentUnderTest: HelloComponent = new HelloComponent();
 
   When(() => {
-    actualResult = getWelcomingMessage(fakeUserName);
+    actualResult = componentUnderTest.getWelcomingMessage(fakeUserName);
   });
 
   describe('user name is Indiana', () => {
