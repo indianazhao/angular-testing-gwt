@@ -4,7 +4,11 @@ describe('Method: getWelcomingMessage', () => {
 
   let actualResult: string, expectedResult: string;
   let fakeUserName: string;
-  let componentUnderTest: HelloComponent = new HelloComponent();
+  let componentUnderTest: HelloComponent;
+
+  Given(() => {
+    componentUnderTest = new HelloComponent();
+  });
 
   When(() => {
     actualResult = componentUnderTest.getWelcomingMessage(fakeUserName);
@@ -12,11 +16,12 @@ describe('Method: getWelcomingMessage', () => {
 
   describe('user name is Indiana', () => {
     Given(() => {
+      componentUnderTest.greeting = 'Hola';
       fakeUserName = 'Indiana';
     });
 
     Then('Should return Hello with Indiana', () => {
-      expectedResult = 'Hello Indiana';
+      expectedResult = 'Hola Indiana';
       expect(actualResult).toEqual(expectedResult);
     });
   });

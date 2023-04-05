@@ -7,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelloComponent implements OnInit {
 
+  greeting: string = 'Hello';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   getWelcomingMessage(userName: string) {
-    return `Hello ${userName}`;
+    return `${this.greeting} ${userName}`;
   }
 }
