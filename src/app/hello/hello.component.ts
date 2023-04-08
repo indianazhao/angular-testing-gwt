@@ -18,8 +18,8 @@ export class HelloComponent implements OnInit {
   greeting: string = 'Hello';
 
   constructor(
-    serviceOne: ServiceOne,
     serviceTwo: ServiceTwo,
+    serviceOne: ServiceOne,
   ) { }
 
   ngOnInit(): void {

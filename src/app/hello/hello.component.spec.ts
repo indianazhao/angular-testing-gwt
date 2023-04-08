@@ -1,3 +1,4 @@
+import { TestBed } from '@angular/core/testing';
 import { HelloComponent, ServiceOne, ServiceTwo } from './hello.component';
 
 describe('Method: getWelcomingMessage', () => {
@@ -7,10 +8,16 @@ describe('Method: getWelcomingMessage', () => {
   let componentUnderTest: HelloComponent;
 
   Given(() => {
-    componentUnderTest = new HelloComponent(
-      new ServiceOne(),
-      new ServiceTwo(),
-    );
+
+    TestBed.configureTestingModule({
+      providers: [
+        HelloComponent,
+        ServiceOne,
+        ServiceTwo,
+      ]
+    });
+
+    componentUnderTest = TestBed.inject(HelloComponent);
   });
 
   When(() => {
