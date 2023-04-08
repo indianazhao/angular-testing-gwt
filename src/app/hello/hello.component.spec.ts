@@ -1,4 +1,4 @@
-import { HelloComponent } from './hello.component';
+import { HelloComponent, ServiceOne, ServiceTwo } from './hello.component';
 
 describe('Method: getWelcomingMessage', () => {
 
@@ -7,7 +7,10 @@ describe('Method: getWelcomingMessage', () => {
   let componentUnderTest: HelloComponent;
 
   Given(() => {
-    componentUnderTest = new HelloComponent();
+    componentUnderTest = new HelloComponent(
+      new ServiceOne(),
+      new ServiceTwo(),
+    );
   });
 
   When(() => {

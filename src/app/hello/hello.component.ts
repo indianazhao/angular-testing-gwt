@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+export class ServiceOne {
+  do1(){}
+}
+
+export class ServiceTwo {
+  do2(){}
+}
+
 @Component({
   selector: 'app-hello',
   templateUrl: './hello.component.html',
@@ -9,7 +17,10 @@ export class HelloComponent implements OnInit {
 
   greeting: string = 'Hello';
 
-  constructor() { }
+  constructor(
+    serviceOne: ServiceOne,
+    serviceTwo: ServiceTwo,
+  ) { }
 
   ngOnInit(): void {
   }
