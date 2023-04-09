@@ -1,3 +1,4 @@
+import { AnotherService } from './another.service';
 import { User } from './user.model';
 import { Injectable } from '@angular/core';
 
@@ -6,6 +7,8 @@ import { Injectable } from '@angular/core';
 //   providedIn: 'root'
 // })
 export class HelloService {
+
+  constructor(private anotherService: AnotherService) {}
 
   getAllUsers(): User[] {
     return [{
