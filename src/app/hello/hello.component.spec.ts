@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { HelloComponent } from './hello.component';
 import { HelloService } from './hello.service';
+import { AnotherService } from './another.service';
 
 describe('Method: getWelcomingMessage', () => {
 
@@ -14,6 +16,9 @@ describe('Method: getWelcomingMessage', () => {
       providers: [
         HelloComponent,
         HelloService,
+        AnotherService,
+        HttpClient,
+        HttpHandler,
       ],
     });
 
