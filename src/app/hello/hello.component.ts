@@ -1,3 +1,4 @@
+import { HelloService } from './hello.service';
 import { User } from './user.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,17 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class HelloComponent implements OnInit {
 
   greeting: string = 'Hello';
-  users: User[] = [{
-    name: 'Indiana',
-    age: 28,
-  }, {
-    name: 'Annie',
-    age: 22,
-  }];
+  users: User[] = [];
 
-  constructor() { }
+  constructor(private helloService: HelloService) { }
 
   ngOnInit(): void {
+    this.users = this.helloService.getAllUsers();
   }
 
   // direct input/output
