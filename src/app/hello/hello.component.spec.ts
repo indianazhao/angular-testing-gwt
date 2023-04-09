@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { HelloComponent } from './hello.component';
 import { HelloService } from './hello.service';
-import { AnotherService } from './another.service';
 
 describe('Method: getWelcomingMessage', () => {
 
@@ -10,15 +8,40 @@ describe('Method: getWelcomingMessage', () => {
   let fakeUserName: string;
   let componentUnderTest: HelloComponent;
 
+  // spy
+  let helloServiceSpy = {
+    getAllUsersCalled: false,
+    getAllUsers() {
+      this.getAllUsersCalled = true;
+      return [{
+        name: 'Indiana',
+        age: 28,
+      }, {
+        name: 'Annie',
+        age: 22,
+      }];
+    }
+  };
+
   Given(() => {
 
     TestBed.configureTestingModule({
       providers: [
         HelloComponent,
-        HelloService,
-        AnotherService,
-        HttpClient,
-        HttpHandler,
+        {
+          provide: HelloService,
+          useValue: helloServiceSpy,
+
+          // dummy
+          // useValue: {},
+
+          // stub
+          // useValue: {
+          //   getAllUsers() {
+          //     return [];
+          //   }
+          // }
+        },
       ],
     });
 
@@ -62,6 +85,7 @@ describe('Method: getWelcomingMessage', () => {
 
     Then(() => {
       expect(componentUnderTest.users.length).toBeGreaterThan(0);
+      expect(helloServiceSpy.getAllUsersCalled).toBeTruthy();
     });
   });
 

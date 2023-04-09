@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 // })
 export class HelloService {
 
-  constructor(private anotherService: AnotherService) {}
+  constructor() {}
 
   getAllUsers(): User[] {
     return [{
