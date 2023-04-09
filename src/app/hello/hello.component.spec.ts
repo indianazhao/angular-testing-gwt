@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HelloComponent } from './hello.component';
 import { HelloService } from './hello.service';
+import { createSpyFromClass, provideAutoSpy, Spy } from 'jest-auto-spies';
 
 describe('Method: getWelcomingMessage', () => {
 
@@ -9,7 +10,7 @@ describe('Method: getWelcomingMessage', () => {
   let componentUnderTest: HelloComponent;
 
   // spy
-  let helloServiceSpy = {
+  let helloServiceSpy: Spy<HelloService>;/*  = {
     getAllUsersCalled: false,
     getAllUsers() {
       this.getAllUsersCalled = true;
@@ -21,31 +22,23 @@ describe('Method: getWelcomingMessage', () => {
         age: 22,
       }];
     }
-  };
+  }; */
 
   Given(() => {
 
     TestBed.configureTestingModule({
       providers: [
         HelloComponent,
-        {
-          provide: HelloService,
-          useValue: helloServiceSpy,
-
-          // dummy
-          // useValue: {},
-
-          // stub
-          // useValue: {
-          //   getAllUsers() {
-          //     return [];
-          //   }
-          // }
-        },
+        // {
+        //   provide: HelloService,
+        //   useValue: createSpyFromClass(HelloService),
+        // }
+        provideAutoSpy(HelloService),
       ],
     });
 
     componentUnderTest = TestBed.inject(HelloComponent);
+    helloServiceSpy = TestBed.inject(HelloService) as Spy<HelloService>;
   });
 
   describe('Method: getWelcomingMessage', () => {
@@ -79,13 +72,20 @@ describe('Method: getWelcomingMessage', () => {
   });
 
   describe('INIT', () => {
+    Given(() => {
+      helloServiceSpy.getAllUsers.mockReturnValue([{
+        name: 'fakeName',
+        age: 10,
+      }]);
+    });
+
     When(() => {
       componentUnderTest.ngOnInit();
     });
 
     Then(() => {
       expect(componentUnderTest.users.length).toBeGreaterThan(0);
-      expect(helloServiceSpy.getAllUsersCalled).toBeTruthy();
+      expect(helloServiceSpy.getAllUsers).toBeCalled();
     });
   });
 
