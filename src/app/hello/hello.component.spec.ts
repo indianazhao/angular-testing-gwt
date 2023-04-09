@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HelloComponent } from './hello.component';
+import { HelloService } from './hello.service';
 
 describe('Method: getWelcomingMessage', () => {
 
@@ -12,6 +13,7 @@ describe('Method: getWelcomingMessage', () => {
     TestBed.configureTestingModule({
       providers: [
         HelloComponent,
+        HelloService,
       ],
     });
 
@@ -49,7 +51,11 @@ describe('Method: getWelcomingMessage', () => {
   });
 
   describe('INIT', () => {
-    Then('', () => {
+    When(() => {
+      componentUnderTest.ngOnInit();
+    });
+
+    Then(() => {
       expect(componentUnderTest.users.length).toBeGreaterThan(0);
     });
   });
